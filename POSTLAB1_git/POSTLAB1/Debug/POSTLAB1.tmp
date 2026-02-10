@@ -1,0 +1,49 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\Debug\POSTLAB1.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>POSTLAB1.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>POSTLAB1.map</FILE>
+  <FILE>POSTLAB1.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <SETUP><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>17</LINE></SETUP>
+  <MAIN_LOOP><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>61</LINE></MAIN_LOOP>
+  <CONTADOR1><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>67</LINE></CONTADOR1>
+  <CONTADOR2><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>86</LINE></CONTADOR2>
+  <SUMADOR><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>124</LINE></SUMADOR>
+  <out_contador1><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>104</LINE></out_contador1>
+  <delay><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>165</LINE></delay>
+  <incrementar_contador1><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>181</LINE></incrementar_contador1>
+  <restar_contador1><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>186</LINE></restar_contador1>
+  <out_contador2><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>113</LINE></out_contador2>
+  <sumar_contador2><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>203</LINE></sumar_contador2>
+  <restar_contador2><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>208</LINE></restar_contador2>
+  <sin_overflow><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>146</LINE></sin_overflow>
+  <out_suma><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>149</LINE></out_suma>
+  <antirrebote_suma><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>157</LINE></antirrebote_suma>
+  <delay_a><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>167</LINE></delay_a>
+  <delay_b><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>169</LINE></delay_b>
+  <delay_c><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>171</LINE></delay_c>
+  <antirrebote1><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>191</LINE></antirrebote1>
+  <antirrebote2><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>197</LINE></antirrebote2>
+  <antirrebote3><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>213</LINE></antirrebote3>
+  <antirrebote4><FILE>C:\Users\josem\OneDrive\Documentos\Atmel Studio\7.0\POSTLAB1\POSTLAB1\main.asm</FILE><LINE>219</LINE></antirrebote4>
+ </LABELS>
+</ASSEMBLER_INFO>
