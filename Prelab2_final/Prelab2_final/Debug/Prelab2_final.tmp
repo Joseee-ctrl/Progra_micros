@@ -1,0 +1,37 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\Debug\Prelab2_final.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Prelab2_final.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Prelab2_final.map</FILE>
+  <FILE>Prelab2_final.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <RESET><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</FILE><LINE>19</LINE></RESET>
+  <MAIN_LOOP><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</FILE><LINE>56</LINE></MAIN_LOOP>
+  <Tick100ms_Timer0><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</FILE><LINE>72</LINE></Tick100ms_Timer0>
+  <NO_TICK><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</FILE><LINE>67</LINE></NO_TICK>
+  <MostrarLEDs><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</FILE><LINE>107</LINE></MostrarLEDs>
+  <AlarmaCheck><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</FILE><LINE>118</LINE></AlarmaCheck>
+  <T0_CHECK><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</FILE><LINE>85</LINE></T0_CHECK>
+  <T0_NOTYET><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</FILE><LINE>103</LINE></T0_NOTYET>
+  <AlarmOff><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</FILE><LINE>129</LINE></AlarmOff>
+  <AlarmOn><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Prelab2_final\Prelab2_final\main.asm</FILE><LINE>125</LINE></AlarmOn>
+ </LABELS>
+</ASSEMBLER_INFO>
