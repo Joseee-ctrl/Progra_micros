@@ -1,0 +1,36 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\Debug\Laboratorio_2.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Laboratorio_2.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Laboratorio_2.map</FILE>
+  <FILE>Laboratorio_2.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <T7S><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\main.asm</FILE><LINE>15</LINE></T7S>
+  <SETUP><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\main.asm</FILE><LINE>16</LINE></SETUP>
+  <LOOP><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\main.asm</FILE><LINE>35</LINE></LOOP>
+  <DB_1><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\main.asm</FILE><LINE>49</LINE></DB_1>
+  <DB_2><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\main.asm</FILE><LINE>59</LINE></DB_2>
+  <delay><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\main.asm</FILE><LINE>51</LINE></delay>
+  <AUMENTAR><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\main.asm</FILE><LINE>69</LINE></AUMENTAR>
+  <delay2><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\main.asm</FILE><LINE>61</LINE></delay2>
+  <DECREMENTAR><FILE>C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\Laboratorio_2\Laboratorio_2\main.asm</FILE><LINE>78</LINE></DECREMENTAR>
+ </LABELS>
+</ASSEMBLER_INFO>
