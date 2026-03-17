@@ -279,10 +279,10 @@ SAVE_CUR:
 
 CHECK_SECOND:; comprobar 1s
     LDS R16,msH
-    CPI R16,3
+    CPI R16,0
     BRNE CHECK_BLINK
     LDS R16,msL
-    CPI R16,232
+    CPI R16,1
     BRNE CHECK_BLINK; revisar high y low
     CLR R16
     STS msL,R16
@@ -560,6 +560,10 @@ CHECK_24: ;verificar si llego a 24:00 para reiniciar
     LDS R16,hour_u
     CPI R16,4
     BRNE EXIT_UPDATE
+	; EXTRA PROTECCION: solo si segundos == 0
+    LDS R16,seg
+    CPI R16,0
+    BRNE EXIT_UPDATE
     CLR R16
     STS hour_d,R16
     STS hour_u,R16
@@ -591,6 +595,10 @@ DATE_CHECK_MONTH_LIMIT:
 
 ; VERIFICAR LIMITE DE DIAS DEL MES
 DATE_VERIFY_DAY_LIMIT:
+    ; NO validar si estoy editando
+    LDS R20, edit_digit
+    CPI R20, 0
+    BRNE DATE_EXIT_NO_VALIDATE
 ; evitar dia = 00
 	LDS R16,day_d
 	LDS R17,day_u
@@ -659,6 +667,9 @@ CHECK_LIMIT: ;verificar limite dependiendo de r20 cargado
     RCALL DATE_VERIFY_DAY_LIMIT ;revalidar dia con el nuevo mes
 
 DATE_OK:
+    RET
+
+DATE_EXIT_NO_VALIDATE:
     RET
 
 DATE_NEXT_MONTH_ROUTINE: ;CAMBIAR DE MES
@@ -800,9 +811,12 @@ INC_HOUR_U:
 	LDS R18,hour_d
 	CPI R18,2
 	BRNE INC_HU_MAX9; si no es 2 salto 
-	CPI R17,4; si es 2 el maximo es 3 (23hrs)
+	CPI R17,4
 	BRLO INC_HU_SAVE
-	CLR R17; si se paso pongo unidad en 0
+	;si llega a 24 regresar a 00
+	CLR R17
+	CLR R18
+	STS hour_d,R18
 	RJMP INC_HU_SAVE
 
 INC_HU_MAX9:
@@ -835,12 +849,17 @@ INC_MU_SAVE:
 INC_HOUR_FIX:
 	LDS R17,hour_d
 	CPI R17,2
-	BRNE INC_EXIT
+	BRNE FIX_EXIT
+
 	LDS R17,hour_u
 	CPI R17,4
-	BRLO INC_EXIT
+	BRLO FIX_EXIT
+
 	LDI R17,3
 	STS hour_u,R17
+
+FIX_EXIT:
+	RET
 
 ; INCREMENTAR FECHA
 INC_DIGIT_DATE:
