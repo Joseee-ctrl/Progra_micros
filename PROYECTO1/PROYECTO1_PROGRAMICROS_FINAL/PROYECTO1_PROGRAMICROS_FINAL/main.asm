@@ -279,10 +279,10 @@ SAVE_CUR:
 
 CHECK_SECOND:; comprobar 1s
     LDS R16,msH
-    CPI R16,0
+    CPI R16,3
     BRNE CHECK_BLINK
     LDS R16,msL
-    CPI R16,1
+    CPI R16,232
     BRNE CHECK_BLINK; revisar high y low
     CLR R16
     STS msL,R16
