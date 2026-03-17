@@ -1,7 +1,7 @@
 /*
 * Proyecto1_Progrademicros_mar24050
 * Autor : Jose Martinez
-* Descripción: Proyecto 1 programacion de microcontroladores: Reloj de 24 horas + fecha + alarma + settings 
+* DescripciÃ³n: Proyecto 1 programacion de microcontroladores: Reloj de 24 horas + fecha + alarma + settings 
 */
 
 ; ======================== VARIABLES SRAM
@@ -74,7 +74,7 @@ SETUP:
     OUT DDRD,R16
     CLR R16
     OUT PORTD,R16
-; PC1–PC5 salida
+; PC1â€“PC5 salida
     LDI R16,0b00111110
     OUT DDRC,R16
     CLR R16
@@ -262,7 +262,7 @@ SHOW_UM:
     SBI PORTC,5
 
 NEXT_DIG:
-    LDS R16,current; incrementa current (para variar que digito se muestra "engañar al ojo")
+    LDS R16,current; incrementa current (para variar que digito se muestra "engaÃ±ar al ojo")
     INC R16
     CPI R16,4
     BRLO SAVE_CUR
@@ -279,10 +279,10 @@ SAVE_CUR:
 
 CHECK_SECOND:; comprobar 1s
     LDS R16,msH
-    CPI R16,0
+    CPI R16,3
     BRNE CHECK_BLINK
     LDS R16,msL
-    CPI R16,1
+    CPI R16,232
     BRNE CHECK_BLINK; revisar high y low
     CLR R16
     STS msL,R16
@@ -700,7 +700,7 @@ CHECK_ALARM:
 	LDS R16,seg
 	CPI R16,0
 	BRNE ALARM_EXIT
-; si ya está activa no volver a activarla
+; si ya estÃ¡ activa no volver a activarla
 	LDS R18,alarm_active
 	CPI R18,1
 	BREQ ALARM_EXIT
