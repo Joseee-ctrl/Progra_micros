@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\PROYECTO1\PROYECTO1_PROGRAMICROS_FINAL\PROYECTO1_PROGRAMICROS_FINAL\main.asm Sun Mar 15 13:13:20 2026
+AVRASM ver. 2.2.8  C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\PROYECTO1\PROYECTO1_PROGRAMICROS_FINAL\PROYECTO1_PROGRAMICROS_FINAL\main.asm Mon Mar 16 21:50:42 2026
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\PROYECTO1\PROYECTO1_PROGRAMICROS_FINAL\PROYECTO1_PROGRAMICROS_FINAL\main.asm(8): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.inc'
@@ -1214,7 +1214,7 @@ C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\
 0000a1 982d                      	CBI PORTB,5
                                  
                                  DO_UP:
-0000a2 d208                      	RCALL INC_DIGIT; rutina de incrementar 
+0000a2 d223                      	RCALL INC_DIGIT; rutina de incrementar 
 0000a3 c00c                      	RJMP CLEAR_BTN
                                  
                                  CHECK_DOWN:; DOWN (PB3)
@@ -1228,7 +1228,7 @@ C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\
 0000ad 982d                      	CBI PORTB,5
                                  
                                  DO_DOWN:
-0000ae d281                      	RCALL DEC_DIGIT
+0000ae d29e                      	RCALL DEC_DIGIT
 0000af c000                      	RJMP CLEAR_BTN
                                  
                                  CLEAR_BTN:
@@ -1314,10 +1314,10 @@ C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\
                                  
                                  CHECK_SECOND:; comprobar 1s
 0000fb 9100 0101                     LDS R16,msH
-0000fd 3000                          CPI R16,0
+0000fd 3003                          CPI R16,3
 0000fe f461                          BRNE CHECK_BLINK
 0000ff 9100 0100                     LDS R16,msL
-000101 3001                          CPI R16,1
+000101 3e08                          CPI R16,232
 000102 f441                          BRNE CHECK_BLINK; revisar high y low
 000103 2700                          CLR R16
 000104 9300 0100                     STS msL,R16
@@ -1524,7 +1524,7 @@ C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\
 0001c5 f021                          BREQ BLINK_OFF; si es 0 se apaga el digito en ese instante
                                  
                                  SHOW_NORMAL:
-0001c6 d28a                          RCALL SEG7; convertir valor 
+0001c6 d2aa                          RCALL SEG7; convertir valor 
 0001c7 912f                          POP R18
 0001c8 911f                          POP R17;restaurar registros
 0001c9 9508                          RET
@@ -1549,7 +1549,7 @@ C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\
                                  SAVE_SEC:
 0001d7 9300 0105                     STS seg,R16
 0001d9 3000                          CPI R16,0
-0001da f5a1                          BRNE EXIT_UPDATE
+0001da f5c1                          BRNE EXIT_UPDATE
 0001db 9100 0106                     LDS R16,min_u
 0001dd 9503                          INC R16
 0001de 300a                          CPI R16,10
@@ -1558,7 +1558,7 @@ C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\
                                  SAVE_MU:
 0001e1 9300 0106                     STS min_u,R16
 0001e3 3000                          CPI R16,0
-0001e4 f551                          BRNE EXIT_UPDATE
+0001e4 f571                          BRNE EXIT_UPDATE
 0001e5 9100 0107                     LDS R16,min_d
 0001e7 9503                          INC R16
 0001e8 3006                          CPI R16,6
@@ -1567,7 +1567,7 @@ C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\
                                  SAVE_MD:
 0001eb 9300 0107                     STS min_d,R16
 0001ed 3000                          CPI R16,0
-0001ee f501                          BRNE EXIT_UPDATE
+0001ee f521                          BRNE EXIT_UPDATE
 0001ef 9100 0108                     LDS R16,hour_u
 0001f1 9503                          INC R16
 0001f2 300a                          CPI R16,10
@@ -1586,669 +1586,701 @@ C:\Users\josem\OneDrive\Documentos\SEMESTRE 5\PROGRA DE MICROS S5\Progra_micros\
 0001ff 9300 0109                     STS hour_d,R16
                                  
                                  CHECK_24: ;verificar si llego a 24:00 para reiniciar
-000201 9100 0109                     LDS R16,hour_d
-000203 3002                          CPI R16,2
-000204 f451                          BRNE EXIT_UPDATE
-000205 9100 0108                     LDS R16,hour_u
-000207 3004                          CPI R16,4
-000208 f431                          BRNE EXIT_UPDATE
-000209 2700                          CLR R16
-00020a 9300 0109                     STS hour_d,R16
-00020c 9300 0108                     STS hour_u,R16
-00020e d002                      	RCALL DATE_INCREMENT_ROUTINE
+000201 9120 0111                     LDS R18,edit_digit
+000203 3020                          CPI R18,0
+000204 f471                          BRNE EXIT_UPDATE;no cambiar fecha si estoy editando
+000205 9100 0109                     LDS R16,hour_d
+000207 3002                          CPI R16,2
+000208 f451                          BRNE EXIT_UPDATE
+000209 9100 0108                     LDS R16,hour_u
+00020b 3004                          CPI R16,4
+00020c f431                          BRNE EXIT_UPDATE
+00020d 2700                          CLR R16
+00020e 9300 0109                     STS hour_d,R16
+000210 9300 0108                     STS hour_u,R16
+000212 d002                      	RCALL DATE_INCREMENT_ROUTINE
                                  
                                  EXIT_UPDATE:
-00020f d076                          RCALL CHECK_ALARM; luego de guardar valores revisar alarma
-000210 9508                          RET
-                                 
+000213 d08d                          RCALL CHECK_ALARM; luego de guardar valores revisar alarma
+000214 9508                          RET
                                  
                                  ; ========================================= SUBRUTINAS DE FECHA
                                  
                                  DATE_INCREMENT_ROUTINE:; unidades dias y decenas icnrementar
-000211 9100 010a                     LDS R16,day_u
-000213 9503                          INC R16
-000214 300a                          CPI R16,10
-000215 f048                          BRLO DATE_SAVE_DAYU
-000216 2700                          CLR R16
-000217 9300 010a                     STS day_u,R16
-000219 9110 010b                     LDS R17,day_d
-00021b 9513                          INC R17
-00021c 9310 010b                     STS day_d,R17
-00021e c002                          RJMP DATE_CHECK_MONTH_LIMIT
+000215 9100 010a                     LDS R16,day_u
+000217 9503                          INC R16
+000218 300a                          CPI R16,10
+000219 f048                          BRLO DATE_SAVE_DAYU
+00021a 2700                          CLR R16
+00021b 9300 010a                     STS day_u,R16
+00021d 9110 010b                     LDS R17,day_d
+00021f 9513                          INC R17
+000220 9310 010b                     STS day_d,R17
+000222 c002                          RJMP DATE_CHECK_MONTH_LIMIT
                                  DATE_SAVE_DAYU:
-00021f 9300 010a                     STS day_u,R16
+000223 9300 010a                     STS day_u,R16
                                  
                                  DATE_CHECK_MONTH_LIMIT:
-000221 d001                          RCALL DATE_VERIFY_DAY_LIMIT
-000222 9508                          RET
+000225 d001                          RCALL DATE_VERIFY_DAY_LIMIT
+000226 9508                          RET
                                  
                                  ; VERIFICAR LIMITE DE DIAS DEL MES
                                  DATE_VERIFY_DAY_LIMIT:
                                  ; evitar dia = 00
-000223 9100 010b                 	LDS R16,day_d
-000225 9110 010a                 	LDS R17,day_u
-000227 2b01                      	OR  R16,R17
-000228 f431                      	BRNE CHECK_MONTH_ZERO
-000229 e001                      	LDI R16,1
-00022a 9300 010a                 	STS day_u,R16
-00022c 2700                      	CLR R16
-00022d 9300 010b                 	STS day_d,R16
+000227 9100 010b                 	LDS R16,day_d
+000229 9110 010a                 	LDS R17,day_u
+00022b 2b01                      	OR  R16,R17
+00022c f431                      	BRNE CHECK_MONTH_ZERO
+00022d e001                      	LDI R16,1
+00022e 9300 010a                 	STS day_u,R16
+000230 2700                      	CLR R16
+000231 9300 010b                 	STS day_d,R16
                                  ; evitar mes = 00
                                  CHECK_MONTH_ZERO:
-00022f 9120 010d                 	LDS R18,month_d
-000231 9130 010c                 	LDS R19,month_u
-000233 2b23                      	OR  R18,R19
-000234 f431                      	BRNE CALC_DAY
-000235 e031                      	LDI R19,1
-000236 9330 010c                 	STS month_u,R19
-000238 2733                      	CLR R19
-000239 9330 010d                 	STS month_d,R19
+000233 9120 010d                 	LDS R18,month_d
+000235 9130 010c                 	LDS R19,month_u
+000237 2b23                      	OR  R18,R19
+000238 f431                      	BRNE CALC_DAY
+000239 e031                      	LDI R19,1
+00023a 9330 010c                 	STS month_u,R19
+00023c 2733                      	CLR R19
+00023d 9330 010d                 	STS month_d,R19
                                  
                                  ;calcular dia (decena y unidad junto no como digito separado)
                                  CALC_DAY:
-00023b 9100 010b                 	LDS R16,day_d
-00023d 2f20                      	MOV R18,R16
-00023e 0f00                      	LSL R16
-00023f 0f00                      	LSL R16
-000240 0f00                      	LSL R16
-000241 0f22                      	LSL R18; LSL multiplica x2 (lo uso para llegar a decena (*10))
-000242 0f02                      	ADD R16,R18 
-000243 9110 010a                 	LDS R17,day_u
-000245 0f01                      	ADD R16,R17; sumamos con unidades
+00023f 9100 010b                 	LDS R16,day_d
+000241 2f20                      	MOV R18,R16
+000242 0f00                      	LSL R16
+000243 0f00                      	LSL R16
+000244 0f00                      	LSL R16
+000245 0f22                      	LSL R18; LSL multiplica x2 (lo uso para llegar a decena (*10))
+000246 0f02                      	ADD R16,R18 
+000247 9110 010a                 	LDS R17,day_u
+000249 0f01                      	ADD R16,R17; sumamos con unidades
                                  	;ver en que mes estoy
-000246 9120 010d                 	LDS R18,month_d; (decena mes 0 o 1)
-000248 9130 010c                 	LDS R19,month_u; (unidad mes 1 a 9)
+00024a 9120 010d                 	LDS R18,month_d; (decena mes 0 o 1)
+00024c 9130 010c                 	LDS R19,month_u; (unidad mes 1 a 9)
                                  
                                  ; febrero
-00024a 3020                      	CPI R18,0; decena mes
-00024b f421                      	BRNE CHECK_30
-00024c 3032                      	CPI R19,2; febrero (mes 2)
-00024d f411                      	BRNE CHECK_30
-00024e e14c                      	LDI R20,28; 28 dias maximo
-00024f c00c                      	RJMP CHECK_LIMIT
+00024e 3020                      	CPI R18,0; decena mes
+00024f f421                      	BRNE CHECK_30
+000250 3032                      	CPI R19,2; febrero (mes 2)
+000251 f411                      	BRNE CHECK_30
+000252 e14c                      	LDI R20,28; 28 dias maximo
+000253 c00c                      	RJMP CHECK_LIMIT
                                  ; meses de 30 dias
                                  CHECK_30:
-000250 3020                      	CPI R18,0; decena mes es 0 (meses de un digito)
-000251 f449                      	BRNE MONTH_31
-000252 3034                      	CPI R19,4; abril
-000253 f029                      	BREQ SET_30
-000254 3036                      	CPI R19,6; junio
-000255 f019                      	BREQ SET_30
-000256 3039                      	CPI R19,9;septiembre
-000257 f009                      	BREQ SET_30
-000258 c002                      	RJMP MONTH_31; si no es alguno de esos tiene 31 dias
+000254 3020                      	CPI R18,0; decena mes es 0 (meses de un digito)
+000255 f449                      	BRNE MONTH_31
+000256 3034                      	CPI R19,4; abril
+000257 f029                      	BREQ SET_30
+000258 3036                      	CPI R19,6; junio
+000259 f019                      	BREQ SET_30
+00025a 3039                      	CPI R19,9;septiembre
+00025b f009                      	BREQ SET_30
+00025c c002                      	RJMP MONTH_31; si no es alguno de esos tiene 31 dias
                                  SET_30:
-000259 e14e                      	LDI R20,30
-00025a c001                      	RJMP CHECK_LIMIT
+00025d e14e                      	LDI R20,30
+00025e c001                      	RJMP CHECK_LIMIT
                                  ; meses de 31 dias
                                  MONTH_31:
-00025b e14f                      	LDI R20,31
+00025f e14f                      	LDI R20,31
                                  
                                  CHECK_LIMIT: ;verificar limite dependiendo de r20 cargado
-00025c 1704                      	CP R16,R20
-00025d f010                      	BRLO DATE_OK; si el dia actual es menor salta a date ok
-00025e f009                      	BREQ DATE_OK
-00025f d001                      	RCALL DATE_NEXT_MONTH_ROUTINE;; si es el mismo dia no importa si no va a esta rutina
+000260 1704                          CP R16,R20
+000261 f018                          BRLO DATE_OK; si el dia actual es menor salta a date ok
+000262 f011                          BREQ DATE_OK
+000263 d002                          RCALL DATE_NEXT_MONTH_ROUTINE;; si es el mismo dia no importa si no va a esta rutina
+000264 dfc2                          RCALL DATE_VERIFY_DAY_LIMIT ;revalidar dia con el nuevo mes
                                  
                                  DATE_OK:
-000260 9508                      	RET
+000265 9508                          RET
                                  
                                  DATE_NEXT_MONTH_ROUTINE: ;CAMBIAR DE MES
-000261 e001                          LDI R16,1
-000262 9300 010a                     STS day_u,R16
-000264 2700                          CLR R16
-000265 9300 010b                     STS day_d,R16; reiniciar dia a 01
-000267 9100 010c                     LDS R16,month_u
-000269 9503                          INC R16
-00026a 300a                          CPI R16,10
-00026b f048                          BRLO SAVE_MONTH_U; incrementar unidad mes
-00026c 2700                          CLR R16
-00026d 9300 010c                     STS month_u,R16
-00026f 9110 010d                     LDS R17,month_d
-000271 9513                          INC R17
-000272 9310 010d                     STS month_d,R17; si se paso unidad mes sumar decena
-000274 c002                          RJMP CHECK_YEAR_LIMIT
+000266 e001                          LDI R16,1
+000267 9300 010a                     STS day_u,R16
+000269 2700                          CLR R16
+00026a 9300 010b                     STS day_d,R16; reiniciar dia a 01
+00026c 9100 010c                     LDS R16,month_u
+00026e 9503                          INC R16
+00026f 300a                          CPI R16,10
+000270 f048                          BRLO SAVE_MONTH_U; incrementar unidad mes
+000271 2700                          CLR R16
+000272 9300 010c                     STS month_u,R16
+000274 9110 010d                     LDS R17,month_d
+000276 9513                          INC R17
+000277 9310 010d                     STS month_d,R17; si se paso unidad mes sumar decena
+000279 c017                          RJMP CHECK_YEAR_LIMIT
                                  
                                  SAVE_MONTH_U:
-000275 9300 010c                     STS month_u,R16;si no hubo overflow guardamos
+00027a 9300 010c                     STS month_u,R16
+00027c c014                          RJMP CHECK_YEAR_LIMIT
                                  
+                                 ; validar que mes este entre 01 y 12
+                                 FIX_MONTH_LIMIT:
+00027d 9100 010d                     LDS R16,month_d
+00027f 2f20                          MOV R18,R16
+000280 0f00                          LSL R16
+000281 0f00                          LSL R16
+000282 0f00                          LSL R16
+000283 0f22                          LSL R18
+000284 0f02                          ADD R16,R18
+000285 9110 010c                     LDS R17,month_u
+000287 0f01                          ADD R16,R17   ; R16 = mes completo
+000288 300d                          CPI R16,13
+000289 f030                          BRLO MONTH_OK
+00028a e011                          LDI R17,1
+00028b 9310 010c                     STS month_u,R17
+00028d 2711                          CLR R17
+00028e 9310 010d                     STS month_d,R17
+                                 
+                                 MONTH_OK:
+000290 9508                          RET
                                  
                                  CHECK_YEAR_LIMIT:
-000277 9100 010d                     LDS R16,month_d
-000279 3001                          CPI R16,1
-00027a f451                          BRNE END_MONTH
-00027b 9110 010c                     LDS R17,month_u
-00027d 3013                          CPI R17,3
-00027e f431                          BRNE END_MONTH; si no se ha pasado de 12 termina fecha
-00027f e001                          LDI R16,1
-000280 9300 010c                     STS month_u,R16
-000282 2700                          CLR R16
-000283 9300 010d                     STS month_d,R16; si no empezar en enero
+000291 9100 010d                     LDS R16,month_d
+000293 3001                          CPI R16,1
+000294 f451                          BRNE END_MONTH
+000295 9110 010c                     LDS R17,month_u
+000297 3013                          CPI R17,3
+000298 f431                          BRNE END_MONTH; si no se ha pasado de 12 termina fecha
+000299 e001                          LDI R16,1
+00029a 9300 010c                     STS month_u,R16
+00029c 2700                          CLR R16
+00029d 9300 010d                     STS month_d,R16; si no empezar en enero
                                  
                                  END_MONTH:
-000285 9508                          RET
+00029f dfdd                      	RCALL FIX_MONTH_LIMIT
+0002a0 9508                          RET
                                  
                                  ; ========================================= SUBRUTINAS DE ALARMA
                                  
                                  CHECK_ALARM:
                                  ; solo revisar al inicio del minuto
-000286 9100 0105                 	LDS R16,seg
-000288 3000                      	CPI R16,0
-000289 f501                      	BRNE ALARM_EXIT
+0002a1 9100 0105                 	LDS R16,seg
+0002a3 3000                      	CPI R16,0
+0002a4 f501                      	BRNE ALARM_EXIT
                                  ; si ya está activa no volver a activarla
-00028a 9120 0116                 	LDS R18,alarm_active
-00028c 3021                      	CPI R18,1
-00028d f0e1                      	BREQ ALARM_EXIT
+0002a5 9120 0116                 	LDS R18,alarm_active
+0002a7 3021                      	CPI R18,1
+0002a8 f0e1                      	BREQ ALARM_EXIT
                                  ; comparar hora
-00028e 9100 0109                 	LDS R16,hour_d
-000290 9110 0115                 	LDS R17,alarm_hour_d
-000292 1701                      	CP R16,R17
-000293 f4b1                      	BRNE ALARM_EXIT
-000294 9100 0108                 	LDS R16,hour_u
-000296 9110 0114                 	LDS R17,alarm_hour_u
-000298 1701                      	CP R16,R17
-000299 f481                      	BRNE ALARM_EXIT
+0002a9 9100 0109                 	LDS R16,hour_d
+0002ab 9110 0115                 	LDS R17,alarm_hour_d
+0002ad 1701                      	CP R16,R17
+0002ae f4b1                      	BRNE ALARM_EXIT
+0002af 9100 0108                 	LDS R16,hour_u
+0002b1 9110 0114                 	LDS R17,alarm_hour_u
+0002b3 1701                      	CP R16,R17
+0002b4 f481                      	BRNE ALARM_EXIT
                                  ; comparar minutos
-00029a 9100 0107                 	LDS R16,min_d
-00029c 9110 0113                 	LDS R17,alarm_min_d
-00029e 1701                      	CP R16,R17
-00029f f451                      	BRNE ALARM_EXIT
-0002a0 9100 0106                 	LDS R16,min_u
-0002a2 9110 0112                 	LDS R17,alarm_min_u
-0002a4 1701                      	CP R16,R17
-0002a5 f421                      	BRNE ALARM_EXIT
+0002b5 9100 0107                 	LDS R16,min_d
+0002b7 9110 0113                 	LDS R17,alarm_min_d
+0002b9 1701                      	CP R16,R17
+0002ba f451                      	BRNE ALARM_EXIT
+0002bb 9100 0106                 	LDS R16,min_u
+0002bd 9110 0112                 	LDS R17,alarm_min_u
+0002bf 1701                      	CP R16,R17
+0002c0 f421                      	BRNE ALARM_EXIT
                                  ; activar alarma (BUZZER)
-0002a6 e001                      	LDI R16,1
-0002a7 9300 0116                 	STS alarm_active,R16
-0002a9 9a2d                      	SBI PORTB,5
+0002c1 e001                      	LDI R16,1
+0002c2 9300 0116                 	STS alarm_active,R16
+0002c4 9a2d                      	SBI PORTB,5
                                  
                                  ALARM_EXIT:
-0002aa 9508                      	RET
+0002c5 9508                      	RET
                                  
                                  ; ========================================= SUBRUTINAS DE INCREMENTAR 
                                  INC_DIGIT:
-0002ab 9100 0110                     LDS R16,mode; veo en que modo estoy
-0002ad 3000                          CPI R16,0
-0002ae f409                          BRNE CHECK_INC_DATE
-0002af c007                          RJMP INC_DIGIT_TIME
+0002c6 9100 0110                     LDS R16,mode; veo en que modo estoy
+0002c8 3000                          CPI R16,0
+0002c9 f409                          BRNE CHECK_INC_DATE
+0002ca c007                          RJMP INC_DIGIT_TIME
                                  CHECK_INC_DATE:
-0002b0 3001                          CPI R16,1
-0002b1 f409                          BRNE CHECK_INC_ALARM
-0002b2 c046                          RJMP INC_DIGIT_DATE
+0002cb 3001                          CPI R16,1
+0002cc f409                          BRNE CHECK_INC_ALARM
+0002cd c046                          RJMP INC_DIGIT_DATE
                                  CHECK_INC_ALARM:
-0002b3 3002                          CPI R16,2
-0002b4 f409                          BRNE INC_EXIT
-0002b5 c105                          RJMP INC_DIGIT_ALARM
+0002ce 3002                          CPI R16,2
+0002cf f409                          BRNE INC_EXIT
+0002d0 c10a                          RJMP INC_DIGIT_ALARM
                                  
                                  INC_EXIT:
-0002b6 9508                      	RET
+0002d1 9508                      	RET
                                  
                                  ; INCREMENTAR HORA
                                  INC_DIGIT_TIME:
-0002b7 9100 0111                 	LDS R16,edit_digit; que digito se va a incrementar
-0002b9 3000                      	CPI R16,0
-0002ba f3d9                      	BREQ INC_EXIT
-0002bb 3001                      	CPI R16,1
-0002bc f029                      	BREQ INC_HOUR_D
-0002bd 3002                      	CPI R16,2
-0002be f061                      	BREQ INC_HOUR_U
-0002bf 3003                      	CPI R16,3
-0002c0 f0d9                      	BREQ INC_MIN_D
-0002c1 c023                      	RJMP INC_MIN_U
+0002d2 9100 0111                 	LDS R16,edit_digit; que digito se va a incrementar
+0002d4 3000                      	CPI R16,0
+0002d5 f3d9                      	BREQ INC_EXIT
+0002d6 3001                      	CPI R16,1
+0002d7 f029                      	BREQ INC_HOUR_D
+0002d8 3002                      	CPI R16,2
+0002d9 f061                      	BREQ INC_HOUR_U
+0002da 3003                      	CPI R16,3
+0002db f0d9                      	BREQ INC_MIN_D
+0002dc c023                      	RJMP INC_MIN_U
                                  INC_HOUR_D:
-0002c2 9110 0109                 	LDS R17,hour_d
-0002c4 9513                      	INC R17
-0002c5 3013                      	CPI R17,3;incrementar decena de hora
-0002c6 f008                      	BRLO INC_HD_SAVE
-0002c7 2711                      	CLR R17
+0002dd 9110 0109                 	LDS R17,hour_d
+0002df 9513                      	INC R17
+0002e0 3013                      	CPI R17,3;incrementar decena de hora
+0002e1 f008                      	BRLO INC_HD_SAVE
+0002e2 2711                      	CLR R17
                                  INC_HD_SAVE:
-0002c8 9310 0109                 	STS hour_d,R17
-0002ca c023                      	RJMP INC_HOUR_FIX; arreglar caso especial 23 a 00
+0002e3 9310 0109                 	STS hour_d,R17
+0002e5 c023                      	RJMP INC_HOUR_FIX; arreglar caso especial 23 a 00
                                  INC_HOUR_U:
-0002cb 9110 0108                 	LDS R17,hour_u
-0002cd 9513                      	INC R17
-0002ce 9120 0109                 	LDS R18,hour_d
-0002d0 3022                      	CPI R18,2
-0002d1 f421                      	BRNE INC_HU_MAX9; si no es 2 salto 
-0002d2 3014                      	CPI R17,4; si es 2 el maximo es 3 (23hrs)
-0002d3 f028                      	BRLO INC_HU_SAVE
-0002d4 2711                      	CLR R17; si se paso pongo unidad en 0
-0002d5 c003                      	RJMP INC_HU_SAVE
+0002e6 9110 0108                 	LDS R17,hour_u
+0002e8 9513                      	INC R17
+0002e9 9120 0109                 	LDS R18,hour_d
+0002eb 3022                      	CPI R18,2
+0002ec f421                      	BRNE INC_HU_MAX9; si no es 2 salto 
+0002ed 3014                      	CPI R17,4; si es 2 el maximo es 3 (23hrs)
+0002ee f028                      	BRLO INC_HU_SAVE
+0002ef 2711                      	CLR R17; si se paso pongo unidad en 0
+0002f0 c003                      	RJMP INC_HU_SAVE
                                  
                                  INC_HU_MAX9:
-0002d6 301a                      	CPI R17,10
-0002d7 f008                      	BRLO INC_HU_SAVE
-0002d8 2711                      	CLR R17
+0002f1 301a                      	CPI R17,10
+0002f2 f008                      	BRLO INC_HU_SAVE
+0002f3 2711                      	CLR R17
                                  INC_HU_SAVE:
-0002d9 9310 0108                 	STS hour_u,R17
-0002db 9508                      	RET
+0002f4 9310 0108                 	STS hour_u,R17
+0002f6 9508                      	RET
                                  
                                  INC_MIN_D:
-0002dc 9110 0107                 	LDS R17,min_d
-0002de 9513                      	INC R17
-0002df 3016                      	CPI R17,6
-0002e0 f008                      	BRLO INC_MD_SAVE
-0002e1 2711                      	CLR R17
+0002f7 9110 0107                 	LDS R17,min_d
+0002f9 9513                      	INC R17
+0002fa 3016                      	CPI R17,6
+0002fb f008                      	BRLO INC_MD_SAVE
+0002fc 2711                      	CLR R17
                                  	INC_MD_SAVE:
-0002e2 9310 0107                 	STS min_d,R17
-0002e4 9508                      	RET
+0002fd 9310 0107                 	STS min_d,R17
+0002ff 9508                      	RET
                                  INC_MIN_U:
-0002e5 9110 0106                 	LDS R17,min_u
-0002e7 9513                      	INC R17
-0002e8 301a                      	CPI R17,10
-0002e9 f008                      	BRLO INC_MU_SAVE
-0002ea 2711                      	CLR R17
+000300 9110 0106                 	LDS R17,min_u
+000302 9513                      	INC R17
+000303 301a                      	CPI R17,10
+000304 f008                      	BRLO INC_MU_SAVE
+000305 2711                      	CLR R17
                                  INC_MU_SAVE:
-0002eb 9310 0106                 	STS min_u,R17
-0002ed 9508                      	RET
+000306 9310 0106                 	STS min_u,R17
+000308 9508                      	RET
                                  
                                  INC_HOUR_FIX:
-0002ee 9110 0109                 	LDS R17,hour_d
-0002f0 3012                      	CPI R17,2
-0002f1 f621                      	BRNE INC_EXIT
-0002f2 9110 0108                 	LDS R17,hour_u
-0002f4 3014                      	CPI R17,4
-0002f5 f200                      	BRLO INC_EXIT
-0002f6 e013                      	LDI R17,3
-0002f7 9310 0108                 	STS hour_u,R17
+000309 9110 0109                 	LDS R17,hour_d
+00030b 3012                      	CPI R17,2
+00030c f621                      	BRNE INC_EXIT
+00030d 9110 0108                 	LDS R17,hour_u
+00030f 3014                      	CPI R17,4
+000310 f200                      	BRLO INC_EXIT
+000311 e013                      	LDI R17,3
+000312 9310 0108                 	STS hour_u,R17
                                  
                                  ; INCREMENTAR FECHA
                                  INC_DIGIT_DATE:
-0002f9 9100 0111                 	LDS R16,edit_digit
-0002fb 3000                      	CPI R16,0
-0002fc f409                      	BRNE INC_DATE_CHECK1
-0002fd cfb8                      	RJMP INC_EXIT
+000314 9100 0111                 	LDS R16,edit_digit
+000316 3000                      	CPI R16,0
+000317 f409                      	BRNE INC_DATE_CHECK1
+000318 cfb8                      	RJMP INC_EXIT
                                  INC_DATE_CHECK1:
-0002fe 3001                      	CPI R16,1
-0002ff f409                      	BRNE INC_DATE_CHECK2
-000300 c007                      	RJMP INC_DAY_D
+000319 3001                      	CPI R16,1
+00031a f409                      	BRNE INC_DATE_CHECK2
+00031b c007                      	RJMP INC_DAY_D
                                  INC_DATE_CHECK2:
-000301 3002                      	CPI R16,2
-000302 f409                      	BRNE INC_DATE_CHECK3
-000303 c00e                      	RJMP INC_DAY_U
+00031c 3002                      	CPI R16,2
+00031d f409                      	BRNE INC_DATE_CHECK3
+00031e c00e                      	RJMP INC_DAY_U
                                  INC_DATE_CHECK3:
-000304 3003                      	CPI R16,3
-000305 f409                      	BRNE INC_DATE_CHECK4
-000306 c015                      	RJMP INC_MONTH_D
+00031f 3003                      	CPI R16,3
+000320 f409                      	BRNE INC_DATE_CHECK4
+000321 c015                      	RJMP INC_MONTH_D
                                  INC_DATE_CHECK4:
-000307 c01e                      	RJMP INC_MONTH_U
+000322 c01f                      	RJMP INC_MONTH_U
                                  INC_DAY_D:
-000308 9110 010b                     LDS R17,day_d
-00030a 9513                          INC R17
-00030b 3014                          CPI R17,4
-00030c f008                          BRLO INC_DAY_D_SAVE
-00030d 2711                          CLR R17
+000323 9110 010b                     LDS R17,day_d
+000325 9513                          INC R17
+000326 3014                          CPI R17,4
+000327 f008                          BRLO INC_DAY_D_SAVE
+000328 2711                          CLR R17
                                  INC_DAY_D_SAVE:
-00030e 9310 010b                     STS day_d,R17
-000310 df12                          RCALL DATE_VERIFY_DAY_LIMIT
-000311 9508                          RET
+000329 9310 010b                     STS day_d,R17
+00032b defb                          RCALL DATE_VERIFY_DAY_LIMIT
+00032c 9508                          RET
                                  INC_DAY_U:
-000312 9110 010a                     LDS R17,day_u
-000314 9513                          INC R17
-000315 301a                          CPI R17,10
-000316 f008                          BRLO INC_DAY_U_SAVE
-000317 2711                          CLR R17
+00032d 9110 010a                     LDS R17,day_u
+00032f 9513                          INC R17
+000330 301a                          CPI R17,10
+000331 f008                          BRLO INC_DAY_U_SAVE
+000332 2711                          CLR R17
                                  INC_DAY_U_SAVE:
-000318 9310 010a                     STS day_u,R17
-00031a df08                          RCALL DATE_VERIFY_DAY_LIMIT
-00031b 9508                          RET
+000333 9310 010a                     STS day_u,R17
+000335 def1                          RCALL DATE_VERIFY_DAY_LIMIT
+000336 9508                          RET
                                  INC_MONTH_D:
-00031c 9110 010d                     LDS R17,month_d
-00031e 9513                          INC R17
-00031f 3012                          CPI R17,2
-000320 f008                          BRLO INC_MONTH_D_SAVE
-000321 2711                          CLR R17
+000337 9110 010d                     LDS R17,month_d
+000339 9513                          INC R17
+00033a 3012                          CPI R17,2
+00033b f008                          BRLO INC_MONTH_D_SAVE
+00033c 2711                          CLR R17
                                  INC_MONTH_D_SAVE:
-000322 9310 010d                     STS month_d,R17
-000324 defe                          RCALL DATE_VERIFY_DAY_LIMIT
-000325 9508                          RET
+00033d 9310 010d                     STS month_d,R17
+00033f df3d                      	RCALL FIX_MONTH_LIMIT
+000340 dee6                          RCALL DATE_VERIFY_DAY_LIMIT
+000341 9508                          RET
                                  INC_MONTH_U:
-000326 9110 010c                     LDS R17,month_u
-000328 9513                          INC R17
-000329 301a                          CPI R17,10
-00032a f008                          BRLO INC_MONTH_U_SAVE
-00032b 2711                          CLR R17
+000342 9110 010c                     LDS R17,month_u
+000344 9513                          INC R17
+000345 301a                          CPI R17,10
+000346 f008                          BRLO INC_MONTH_U_SAVE
+000347 2711                          CLR R17
                                  INC_MONTH_U_SAVE:
-00032c 9310 010c                     STS month_u,R17
-00032e def4                          RCALL DATE_VERIFY_DAY_LIMIT
-00032f 9508                          RET
+000348 9310 010c                     STS month_u,R17
+00034a df32                      	RCALL FIX_MONTH_LIMIT
+00034b dedb                          RCALL DATE_VERIFY_DAY_LIMIT
+00034c 9508                          RET
                                  
                                  ; ========================================= SUBRUTINAS DECREMENTAR
                                  DEC_DIGIT:
-000330 9100 0110                     LDS R16,mode
-000332 3000                          CPI R16,0
-000333 f409                          BRNE DEC_CHECK_DATE
-000334 c007                          RJMP DEC_DIGIT_TIME
+00034d 9100 0110                     LDS R16,mode
+00034f 3000                          CPI R16,0
+000350 f409                          BRNE DEC_CHECK_DATE
+000351 c007                          RJMP DEC_DIGIT_TIME
                                  DEC_CHECK_DATE:
-000335 3001                          CPI R16,1
-000336 f409                          BRNE DEC_CHECK_ALARM
-000337 c04c                          RJMP DEC_DIGIT_DATE
+000352 3001                          CPI R16,1
+000353 f409                          BRNE DEC_CHECK_ALARM
+000354 c04d                          RJMP DEC_DIGIT_DATE
                                  DEC_CHECK_ALARM:
-000338 3002                          CPI R16,2
-000339 f409                          BRNE DEC_EXIT_LOCAL
-00033a c0ca                          RJMP DEC_DIGIT_ALARM
+000355 3002                          CPI R16,2
+000356 f409                          BRNE DEC_EXIT_LOCAL
+000357 c0cd                          RJMP DEC_DIGIT_ALARM
                                  DEC_EXIT_LOCAL:
-00033b c07e                          RJMP DEC_EXIT
+000358 c081                          RJMP DEC_EXIT
                                  ; DECREMENTAR HORA
                                  DEC_DIGIT_TIME:
-00033c 9100 0111                     LDS R16,edit_digit
-00033e 3000                          CPI R16,0
-00033f f409                          BRNE DEC_CHECK_HD
-000340 c079                          RJMP DEC_EXIT
+000359 9100 0111                     LDS R16,edit_digit
+00035b 3000                          CPI R16,0
+00035c f409                          BRNE DEC_CHECK_HD
+00035d c07c                          RJMP DEC_EXIT
                                  DEC_CHECK_HD:
-000341 3001                          CPI R16,1
-000342 f409                          BRNE DEC_CHECK_HU
-000343 c006                          RJMP DEC_HOUR_D
+00035e 3001                          CPI R16,1
+00035f f409                          BRNE DEC_CHECK_HU
+000360 c006                          RJMP DEC_HOUR_D
                                  DEC_CHECK_HU:
-000344 3002                          CPI R16,2
-000345 f409                          BRNE DEC_CHECK_MD
-000346 c00d                          RJMP DEC_HOUR_U
+000361 3002                          CPI R16,2
+000362 f409                          BRNE DEC_CHECK_MD
+000363 c00d                          RJMP DEC_HOUR_U
                                  DEC_CHECK_MD:
-000347 3003                          CPI R16,3
-000348 f529                          BRNE DEC_MIN_U
-000349 c01a                          RJMP DEC_MIN_D
+000364 3003                          CPI R16,3
+000365 f529                          BRNE DEC_MIN_U
+000366 c01a                          RJMP DEC_MIN_D
                                  DEC_HOUR_D:
-00034a 9110 0109                     LDS R17,hour_d
-00034c 3010                          CPI R17,0; verificar limite
-00034d f411                          BRNE DEC_HD_STEP; decrementar el valor
-00034e e012                          LDI R17,2
-00034f c001                          RJMP DEC_HD_SAVE
+000367 9110 0109                     LDS R17,hour_d
+000369 3010                          CPI R17,0; verificar limite
+00036a f411                          BRNE DEC_HD_STEP; decrementar el valor
+00036b e012                          LDI R17,2
+00036c c001                          RJMP DEC_HD_SAVE
                                  DEC_HD_STEP:
-000350 951a                          DEC R17
+00036d 951a                          DEC R17
                                  DEC_HD_SAVE:
-000351 9310 0109                     STS hour_d,R17
-000353 c024                          RJMP DEC_HOUR_FIX
+00036e 9310 0109                     STS hour_d,R17
+000370 c024                          RJMP DEC_HOUR_FIX
                                  DEC_HOUR_U:
-000354 9110 0108                     LDS R17,hour_u
-000356 3010                          CPI R17,0
-000357 f441                          BRNE DEC_HU_STEP
-000358 9120 0109                     LDS R18,hour_d
-00035a 3022                          CPI R18,2
-00035b f411                          BRNE DEC_HU_9
-00035c e013                          LDI R17,3
-00035d c003                          RJMP DEC_HU_SAVE
+000371 9110 0108                     LDS R17,hour_u
+000373 3010                          CPI R17,0
+000374 f441                          BRNE DEC_HU_STEP
+000375 9120 0109                     LDS R18,hour_d
+000377 3022                          CPI R18,2
+000378 f411                          BRNE DEC_HU_9
+000379 e013                          LDI R17,3
+00037a c003                          RJMP DEC_HU_SAVE
                                  DEC_HU_9:
-00035e e019                          LDI R17,9
-00035f c001                          RJMP DEC_HU_SAVE
+00037b e019                          LDI R17,9
+00037c c001                          RJMP DEC_HU_SAVE
                                  DEC_HU_STEP:
-000360 951a                          DEC R17
+00037d 951a                          DEC R17
                                  DEC_HU_SAVE:
-000361 9310 0108                     STS hour_u,R17
-000363 c056                          RJMP DEC_EXIT
+00037e 9310 0108                     STS hour_u,R17
+000380 c059                          RJMP DEC_EXIT
                                  DEC_MIN_D:
-000364 9110 0107                     LDS R17,min_d
-000366 3010                          CPI R17,0
-000367 f411                          BRNE DEC_MD_STEP
-000368 e015                          LDI R17,5
-000369 c001                          RJMP DEC_MD_SAVE
+000381 9110 0107                     LDS R17,min_d
+000383 3010                          CPI R17,0
+000384 f411                          BRNE DEC_MD_STEP
+000385 e015                          LDI R17,5
+000386 c001                          RJMP DEC_MD_SAVE
                                  DEC_MD_STEP:
-00036a 951a                          DEC R17
+000387 951a                          DEC R17
                                  DEC_MD_SAVE:
-00036b 9310 0107                     STS min_d,R17
-00036d c04c                          RJMP DEC_EXIT
+000388 9310 0107                     STS min_d,R17
+00038a c04f                          RJMP DEC_EXIT
                                  DEC_MIN_U:
-00036e 9110 0106                     LDS R17,min_u
-000370 3010                          CPI R17,0
-000371 f411                          BRNE DEC_MU_STEP
-000372 e019                          LDI R17,9
-000373 c001                          RJMP DEC_MU_SAVE
+00038b 9110 0106                     LDS R17,min_u
+00038d 3010                          CPI R17,0
+00038e f411                          BRNE DEC_MU_STEP
+00038f e019                          LDI R17,9
+000390 c001                          RJMP DEC_MU_SAVE
                                  DEC_MU_STEP:
-000374 951a                          DEC R17
+000391 951a                          DEC R17
                                  DEC_MU_SAVE:
-000375 9310 0106                     STS min_u,R17
-000377 c042                          RJMP DEC_EXIT
+000392 9310 0106                     STS min_u,R17
+000394 c045                          RJMP DEC_EXIT
                                  DEC_HOUR_FIX:
-000378 9110 0109                     LDS R17,hour_d
-00037a 3012                          CPI R17,2
-00037b f5f1                          BRNE DEC_EXIT
-00037c 9110 0108                     LDS R17,hour_u
-00037e 3014                          CPI R17,4
-00037f f1d0                          BRLO DEC_EXIT
-000380 e013                          LDI R17,3
-000381 9310 0108                     STS hour_u,R17
-000383 c036                          RJMP DEC_EXIT
+000395 9110 0109                     LDS R17,hour_d
+000397 3012                          CPI R17,2
+000398 f009                          BREQ CHECK_U; si =2 seguimos
+000399 c040                          RJMP DEC_EXIT; si no, saltamos largo
+                                 CHECK_U:
+00039a 9110 0108                     LDS R17,hour_u
+00039c 3014                          CPI R17,4
+00039d f1e0                          BRLO DEC_EXIT
+00039e e013                          LDI R17,3
+00039f 9310 0108                     STS hour_u,R17
+0003a1 c038                          RJMP DEC_EXIT
+                                 
                                  ; DECREMENTAR FECHA
                                  DEC_DIGIT_DATE:
-000384 9100 0111                     LDS R16,edit_digit
-000386 3000                          CPI R16,0
-000387 f191                          BREQ DEC_EXIT
-000388 3001                          CPI R16,1
-000389 f029                          BREQ DEC_DAY_D
-00038a 3002                          CPI R16,2
-00038b f071                          BREQ DEC_DAY_U
-00038c 3003                          CPI R16,3
-00038d f0b9                          BREQ DEC_MONTH_D
-00038e c021                          RJMP DEC_MONTH_U
+0003a2 9100 0111                     LDS R16,edit_digit
+0003a4 3000                          CPI R16,0
+0003a5 f1a1                          BREQ DEC_EXIT
+0003a6 3001                          CPI R16,1
+0003a7 f029                          BREQ DEC_DAY_D
+0003a8 3002                          CPI R16,2
+0003a9 f071                          BREQ DEC_DAY_U
+0003aa 3003                          CPI R16,3
+0003ab f0b9                          BREQ DEC_MONTH_D
+0003ac c022                          RJMP DEC_MONTH_U
                                  DEC_DAY_D:
-00038f 9110 010b                     LDS R17,day_d
-000391 3010                          CPI R17,0
-000392 f411                          BRNE DEC_DAY_D_STEP
-000393 e013                          LDI R17,3
-000394 c001                          RJMP DEC_DAY_D_SAVE
+0003ad 9110 010b                     LDS R17,day_d
+0003af 3010                          CPI R17,0
+0003b0 f411                          BRNE DEC_DAY_D_STEP
+0003b1 e013                          LDI R17,3
+0003b2 c001                          RJMP DEC_DAY_D_SAVE
                                  DEC_DAY_D_STEP:
-000395 951a                          DEC R17
+0003b3 951a                          DEC R17
                                  DEC_DAY_D_SAVE:
-000396 9310 010b                     STS day_d,R17
-000398 de8a                          RCALL DATE_VERIFY_DAY_LIMIT
-000399 c020                          RJMP DEC_EXIT
+0003b4 9310 010b                     STS day_d,R17
+0003b6 de70                          RCALL DATE_VERIFY_DAY_LIMIT
+0003b7 c022                          RJMP DEC_EXIT
                                  DEC_DAY_U:
-00039a 9110 010a                     LDS R17,day_u
-00039c 3010                          CPI R17,0
-00039d f411                          BRNE DEC_DAY_U_STEP
-00039e e019                          LDI R17,9
-00039f c001                          RJMP DEC_DAY_U_SAVE
+0003b8 9110 010a                     LDS R17,day_u
+0003ba 3010                          CPI R17,0
+0003bb f411                          BRNE DEC_DAY_U_STEP
+0003bc e019                          LDI R17,9
+0003bd c001                          RJMP DEC_DAY_U_SAVE
                                  DEC_DAY_U_STEP:
-0003a0 951a                          DEC R17
+0003be 951a                          DEC R17
                                  DEC_DAY_U_SAVE:
-0003a1 9310 010a                     STS day_u,R17
-0003a3 de7f                          RCALL DATE_VERIFY_DAY_LIMIT
-0003a4 c015                          RJMP DEC_EXIT
+0003bf 9310 010a                     STS day_u,R17
+0003c1 de65                          RCALL DATE_VERIFY_DAY_LIMIT
+0003c2 c017                          RJMP DEC_EXIT
                                  DEC_MONTH_D:
-0003a5 9110 010d                     LDS R17,month_d
-0003a7 3010                          CPI R17,0
-0003a8 f411                          BRNE DEC_MONTH_D_STEP
-0003a9 e011                          LDI R17,1
-0003aa c001                          RJMP DEC_MONTH_D_SAVE
+0003c3 9110 010d                     LDS R17,month_d
+0003c5 3010                          CPI R17,0
+0003c6 f411                          BRNE DEC_MONTH_D_STEP
+0003c7 e011                          LDI R17,1
+0003c8 c001                          RJMP DEC_MONTH_D_SAVE
                                  DEC_MONTH_D_STEP:
-0003ab 951a                          DEC R17
+0003c9 951a                          DEC R17
                                  DEC_MONTH_D_SAVE:
-0003ac 9310 010d                     STS month_d,R17
-0003ae de74                          RCALL DATE_VERIFY_DAY_LIMIT
-0003af c00a                          RJMP DEC_EXIT
+0003ca 9310 010d                     STS month_d,R17
+0003cc deb0                      	RCALL FIX_MONTH_LIMIT 
+0003cd de59                          RCALL DATE_VERIFY_DAY_LIMIT
+0003ce c00b                          RJMP DEC_EXIT
                                  DEC_MONTH_U:
-0003b0 9110 010c                     LDS R17,month_u
-0003b2 3010                          CPI R17,0
-0003b3 f411                          BRNE DEC_MONTH_U_STEP
-0003b4 e019                          LDI R17,9
-0003b5 c001                          RJMP DEC_MONTH_U_SAVE
+0003cf 9110 010c                     LDS R17,month_u
+0003d1 3010                          CPI R17,0
+0003d2 f411                          BRNE DEC_MONTH_U_STEP
+0003d3 e019                          LDI R17,9
+0003d4 c001                          RJMP DEC_MONTH_U_SAVE
                                  DEC_MONTH_U_STEP:
-0003b6 951a                          DEC R17
+0003d5 951a                          DEC R17
                                  DEC_MONTH_U_SAVE:
-0003b7 9310 010c                     STS month_u,R17
-0003b9 de69                          RCALL DATE_VERIFY_DAY_LIMIT
+0003d6 9310 010c                     STS month_u,R17
+0003d8 dea4                      	RCALL FIX_MONTH_LIMIT 
+0003d9 de4d                          RCALL DATE_VERIFY_DAY_LIMIT
                                  DEC_EXIT:
-0003ba 9508                          RET
+0003da 9508                          RET
                                  
                                  ; ========================================= SUBRUTINAS INC Y DEC ALARMA
                                  INC_DIGIT_ALARM:
-0003bb 9100 0111                 	LDS R16,edit_digit
-0003bd 3000                      	CPI R16,0
-0003be f409                      	BRNE INC_ALARM_CHECK1
-0003bf c044                      	RJMP INC_EXIT_2
+0003db 9100 0111                 	LDS R16,edit_digit
+0003dd 3000                      	CPI R16,0
+0003de f409                      	BRNE INC_ALARM_CHECK1
+0003df c044                      	RJMP INC_EXIT_2
                                  INC_ALARM_CHECK1:
-0003c0 3001                      	CPI R16,1
-0003c1 f409                      	BRNE INC_ALARM_CHECK2
-0003c2 c00a                      	RJMP INC_A_HD
+0003e0 3001                      	CPI R16,1
+0003e1 f409                      	BRNE INC_ALARM_CHECK2
+0003e2 c00a                      	RJMP INC_A_HD
                                  INC_ALARM_CHECK2:
-0003c3 3002                      	CPI R16,2
-0003c4 f409                      	BRNE INC_ALARM_CHECK3
-0003c5 c010                      	RJMP INC_A_HU
+0003e3 3002                      	CPI R16,2
+0003e4 f409                      	BRNE INC_ALARM_CHECK3
+0003e5 c010                      	RJMP INC_A_HU
                                  INC_ALARM_CHECK3:
-0003c6 3003                      	CPI R16,3
-0003c7 f409                      	BRNE INC_ALARM_CHECK4
-0003c8 c01e                      	RJMP INC_A_MD
+0003e6 3003                      	CPI R16,3
+0003e7 f409                      	BRNE INC_ALARM_CHECK4
+0003e8 c01e                      	RJMP INC_A_MD
                                  INC_ALARM_CHECK4:
-0003c9 3004                      	CPI R16,4
-0003ca f409                      	BRNE INC_ALARM_EXIT
-0003cb c024                      	RJMP INC_A_MU
+0003e9 3004                      	CPI R16,4
+0003ea f409                      	BRNE INC_ALARM_EXIT
+0003eb c024                      	RJMP INC_A_MU
                                  INC_ALARM_EXIT:
-0003cc c037                      	RJMP INC_EXIT_2
+0003ec c037                      	RJMP INC_EXIT_2
                                  
                                  INC_A_HD:
-0003cd 9110 0115                 	LDS R17,alarm_hour_d
-0003cf 9513                      	INC R17
-0003d0 3013                      	CPI R17,3
-0003d1 f008                      	BRLO INC_A_HD_SAVE
-0003d2 2711                      	CLR R17
+0003ed 9110 0115                 	LDS R17,alarm_hour_d
+0003ef 9513                      	INC R17
+0003f0 3013                      	CPI R17,3
+0003f1 f008                      	BRLO INC_A_HD_SAVE
+0003f2 2711                      	CLR R17
                                  INC_A_HD_SAVE:
-0003d3 9310 0115                 	STS alarm_hour_d,R17
-0003d5 c023                      	RJMP INC_A_FIX
+0003f3 9310 0115                 	STS alarm_hour_d,R17
+0003f5 c023                      	RJMP INC_A_FIX
                                  INC_A_HU:
-0003d6 9110 0114                 	LDS R17,alarm_hour_u
-0003d8 9513                      	INC R17
-0003d9 9120 0115                 	LDS R18,alarm_hour_d
-0003db 3022                      	CPI R18,2
-0003dc f421                      	BRNE INC_A_HU_MAX9
-0003dd 3014                      	CPI R17,4
-0003de f028                      	BRLO INC_A_HU_SAVE
-0003df 2711                      	CLR R17
-0003e0 c003                      	RJMP INC_A_HU_SAVE
+0003f6 9110 0114                 	LDS R17,alarm_hour_u
+0003f8 9513                      	INC R17
+0003f9 9120 0115                 	LDS R18,alarm_hour_d
+0003fb 3022                      	CPI R18,2
+0003fc f421                      	BRNE INC_A_HU_MAX9
+0003fd 3014                      	CPI R17,4
+0003fe f028                      	BRLO INC_A_HU_SAVE
+0003ff 2711                      	CLR R17
+000400 c003                      	RJMP INC_A_HU_SAVE
                                  INC_A_HU_MAX9:
-0003e1 301a                      	CPI R17,10
-0003e2 f008                      	BRLO INC_A_HU_SAVE
-0003e3 2711                      	CLR R17
+000401 301a                      	CPI R17,10
+000402 f008                      	BRLO INC_A_HU_SAVE
+000403 2711                      	CLR R17
                                  INC_A_HU_SAVE:
-0003e4 9310 0114                 	STS alarm_hour_u,R17
-0003e6 c01d                      	RJMP INC_EXIT_2
+000404 9310 0114                 	STS alarm_hour_u,R17
+000406 c01d                      	RJMP INC_EXIT_2
                                  INC_A_MD:
-0003e7 9110 0113                 	LDS R17,alarm_min_d
-0003e9 9513                      	INC R17
-0003ea 3016                      	CPI R17,6
-0003eb f008                      	BRLO INC_A_MD_SAVE
-0003ec 2711                      	CLR R17
+000407 9110 0113                 	LDS R17,alarm_min_d
+000409 9513                      	INC R17
+00040a 3016                      	CPI R17,6
+00040b f008                      	BRLO INC_A_MD_SAVE
+00040c 2711                      	CLR R17
                                  INC_A_MD_SAVE:
-0003ed 9310 0113                 	STS alarm_min_d,R17
-0003ef c014                      	RJMP INC_EXIT_2
+00040d 9310 0113                 	STS alarm_min_d,R17
+00040f c014                      	RJMP INC_EXIT_2
                                  INC_A_MU:
-0003f0 9110 0112                 	LDS R17,alarm_min_u
-0003f2 9513                      	INC R17
-0003f3 301a                      	CPI R17,10
-0003f4 f008                      	BRLO INC_A_MU_SAVE
-0003f5 2711                      	CLR R17
+000410 9110 0112                 	LDS R17,alarm_min_u
+000412 9513                      	INC R17
+000413 301a                      	CPI R17,10
+000414 f008                      	BRLO INC_A_MU_SAVE
+000415 2711                      	CLR R17
                                  INC_A_MU_SAVE:
-0003f6 9310 0112                 	STS alarm_min_u,R17
-0003f8 c00b                      	RJMP INC_EXIT_2
+000416 9310 0112                 	STS alarm_min_u,R17
+000418 c00b                      	RJMP INC_EXIT_2
                                  INC_A_FIX:
-0003f9 9110 0115                 	LDS R17,alarm_hour_d
-0003fb 3012                      	CPI R17,2
-0003fc f439                      	BRNE INC_EXIT_2
-0003fd 9110 0114                 	LDS R17,alarm_hour_u
-0003ff 3014                      	CPI R17,4
-000400 f018                      	BRLO INC_EXIT_2
-000401 e013                      	LDI R17,3
-000402 9310 0114                 	STS alarm_hour_u,R17
+000419 9110 0115                 	LDS R17,alarm_hour_d
+00041b 3012                      	CPI R17,2
+00041c f439                      	BRNE INC_EXIT_2
+00041d 9110 0114                 	LDS R17,alarm_hour_u
+00041f 3014                      	CPI R17,4
+000420 f018                      	BRLO INC_EXIT_2
+000421 e013                      	LDI R17,3
+000422 9310 0114                 	STS alarm_hour_u,R17
                                  INC_EXIT_2:
-000404 9508                      	RET
+000424 9508                      	RET
                                  DEC_DIGIT_ALARM:
-000405 9100 0111                 	LDS R16,edit_digit
-000407 3000                      	CPI R16,0
-000408 f409                      	BRNE DEC_ALARM_CHECK1
-000409 c046                      	RJMP DEC_EXIT_2
+000425 9100 0111                 	LDS R16,edit_digit
+000427 3000                      	CPI R16,0
+000428 f409                      	BRNE DEC_ALARM_CHECK1
+000429 c046                      	RJMP DEC_EXIT_2
                                  DEC_ALARM_CHECK1:
-00040a 3001                      	CPI R16,1
-00040b f409                      	BRNE DEC_ALARM_CHECK2
-00040c c00a                      	RJMP DEC_A_HD
+00042a 3001                      	CPI R16,1
+00042b f409                      	BRNE DEC_ALARM_CHECK2
+00042c c00a                      	RJMP DEC_A_HD
                                  DEC_ALARM_CHECK2:
-00040d 3002                      	CPI R16,2
-00040e f409                      	BRNE DEC_ALARM_CHECK3
-00040f c011                      	RJMP DEC_A_HU
+00042d 3002                      	CPI R16,2
+00042e f409                      	BRNE DEC_ALARM_CHECK3
+00042f c011                      	RJMP DEC_A_HU
                                  DEC_ALARM_CHECK3:
-000410 3003                      	CPI R16,3
-000411 f409                      	BRNE DEC_ALARM_CHECK4
-000412 c01e                      	RJMP DEC_A_MD
+000430 3003                      	CPI R16,3
+000431 f409                      	BRNE DEC_ALARM_CHECK4
+000432 c01e                      	RJMP DEC_A_MD
                                  DEC_ALARM_CHECK4:
-000413 3004                      	CPI R16,4
-000414 f409                      	BRNE DEC_ALARM_EXIT
-000415 c025                      	RJMP DEC_A_MU
+000433 3004                      	CPI R16,4
+000434 f409                      	BRNE DEC_ALARM_EXIT
+000435 c025                      	RJMP DEC_A_MU
                                  DEC_ALARM_EXIT:
-000416 c039                      	RJMP DEC_EXIT_2
+000436 c039                      	RJMP DEC_EXIT_2
                                  DEC_A_HD:
-000417 9110 0115                 	LDS R17,alarm_hour_d
-000419 3010                      	CPI R17,0
-00041a f411                      	BRNE DEC_A_HD_STEP
-00041b e012                      	LDI R17,2
-00041c c001                      	RJMP DEC_A_HD_SAVE
+000437 9110 0115                 	LDS R17,alarm_hour_d
+000439 3010                      	CPI R17,0
+00043a f411                      	BRNE DEC_A_HD_STEP
+00043b e012                      	LDI R17,2
+00043c c001                      	RJMP DEC_A_HD_SAVE
                                  DEC_A_HD_STEP:
-00041d 951a                      	DEC R17
+00043d 951a                      	DEC R17
                                  DEC_A_HD_SAVE:
-00041e 9310 0115                 	STS alarm_hour_d,R17
-000420 c024                      	RJMP DEC_A_FIX
+00043e 9310 0115                 	STS alarm_hour_d,R17
+000440 c024                      	RJMP DEC_A_FIX
                                  DEC_A_HU:
-000421 9110 0114                 	LDS R17,alarm_hour_u
-000423 3010                      	CPI R17,0
-000424 f441                      	BRNE DEC_A_HU_STEP
-000425 9120 0115                 	LDS R18,alarm_hour_d
-000427 3022                      	CPI R18,2
-000428 f411                      	BRNE DEC_A_HU_9
-000429 e013                      	LDI R17,3
-00042a c003                      	RJMP DEC_A_HU_SAVE
+000441 9110 0114                 	LDS R17,alarm_hour_u
+000443 3010                      	CPI R17,0
+000444 f441                      	BRNE DEC_A_HU_STEP
+000445 9120 0115                 	LDS R18,alarm_hour_d
+000447 3022                      	CPI R18,2
+000448 f411                      	BRNE DEC_A_HU_9
+000449 e013                      	LDI R17,3
+00044a c003                      	RJMP DEC_A_HU_SAVE
                                  DEC_A_HU_9:
-00042b e019                      	LDI R17,9
-00042c c001                      	RJMP DEC_A_HU_SAVE
+00044b e019                      	LDI R17,9
+00044c c001                      	RJMP DEC_A_HU_SAVE
                                  DEC_A_HU_STEP:
-00042d 951a                      	DEC R17
+00044d 951a                      	DEC R17
                                  DEC_A_HU_SAVE:
-00042e 9310 0114                 	STS alarm_hour_u,R17
-000430 c01f                      	RJMP DEC_EXIT_2
-                                 DEC_A_MD:
-000431 9110 0113                 	LDS R17,alarm_min_d
-000433 3010                      	CPI R17,0
-000434 f411                      	BRNE DEC_A_MD_STEP
-000435 e015                      	LDI R17,5
-000436 c001                      	RJMP DEC_A_MD_SAVE
-                                 DEC_A_MD_STEP:
-000437 951a                      	DEC R17
-                                 DEC_A_MD_SAVE:
-000438 9310 0113                 	STS alarm_min_d,R17
-00043a c015                      	RJMP DEC_EXIT_2
-                                 DEC_A_MU:
-00043b 9110 0112                 	LDS R17,alarm_min_u
-00043d 3010                      	CPI R17,0
-00043e f411                      	BRNE DEC_A_MU_STEP
-00043f e019                      	LDI R17,9
-000440 c001                      	RJMP DEC_A_MU_SAVE
-                                 DEC_A_MU_STEP:
-000441 951a                      	DEC R17
-                                 DEC_A_MU_SAVE:
-000442 9310 0112                 	STS alarm_min_u,R17
-000444 c00b                      	RJMP DEC_EXIT_2
-                                 DEC_A_FIX:
-000445 9110 0115                 	LDS R17,alarm_hour_d
-000447 3012                      	CPI R17,2
-000448 f439                      	BRNE DEC_EXIT_2
-000449 9110 0114                 	LDS R17,alarm_hour_u
-00044b 3014                      	CPI R17,4
-00044c f018                      	BRLO DEC_EXIT_2
-00044d e013                      	LDI R17,3
 00044e 9310 0114                 	STS alarm_hour_u,R17
+000450 c01f                      	RJMP DEC_EXIT_2
+                                 DEC_A_MD:
+000451 9110 0113                 	LDS R17,alarm_min_d
+000453 3010                      	CPI R17,0
+000454 f411                      	BRNE DEC_A_MD_STEP
+000455 e015                      	LDI R17,5
+000456 c001                      	RJMP DEC_A_MD_SAVE
+                                 DEC_A_MD_STEP:
+000457 951a                      	DEC R17
+                                 DEC_A_MD_SAVE:
+000458 9310 0113                 	STS alarm_min_d,R17
+00045a c015                      	RJMP DEC_EXIT_2
+                                 DEC_A_MU:
+00045b 9110 0112                 	LDS R17,alarm_min_u
+00045d 3010                      	CPI R17,0
+00045e f411                      	BRNE DEC_A_MU_STEP
+00045f e019                      	LDI R17,9
+000460 c001                      	RJMP DEC_A_MU_SAVE
+                                 DEC_A_MU_STEP:
+000461 951a                      	DEC R17
+                                 DEC_A_MU_SAVE:
+000462 9310 0112                 	STS alarm_min_u,R17
+000464 c00b                      	RJMP DEC_EXIT_2
+                                 DEC_A_FIX:
+000465 9110 0115                 	LDS R17,alarm_hour_d
+000467 3012                      	CPI R17,2
+000468 f439                      	BRNE DEC_EXIT_2
+000469 9110 0114                 	LDS R17,alarm_hour_u
+00046b 3014                      	CPI R17,4
+00046c f018                      	BRLO DEC_EXIT_2
+00046d e013                      	LDI R17,3
+00046e 9310 0114                 	STS alarm_hour_u,R17
                                  DEC_EXIT_2:
-000450 9508                      	RET
+000470 9508                      	RET
                                  
                                  ; ========================================= VALORES DISPLAY
                                  SEG7:
-000451 93ef                          PUSH ZL
-000452 93ff                          PUSH ZH
-000453 e0f0                          LDI ZH,HIGH(TS7*2)
-000454 e3ea                          LDI ZL,LOW(TS7*2)
-000455 0fe0                          ADD ZL,R16
-000456 1df1                          ADC ZH,R1
-000457 9104                          LPM R16,Z
-000458 b11b                          IN  R17,PORTD
-000459 7810                      	ANDI R17,0b10000000
-00045a 2b01                      	OR   R16,R17
-00045b b90b                      	OUT  PORTD,R16
-00045c 91ff                          POP ZH
-00045d 91ef                          POP ZL
+000471 93ef                          PUSH ZL
+000472 93ff                          PUSH ZH
+000473 e0f0                          LDI ZH,HIGH(TS7*2)
+000474 e3ea                          LDI ZL,LOW(TS7*2)
+000475 0fe0                          ADD ZL,R16
+000476 1df1                          ADC ZH,R1
+000477 9104                          LPM R16,Z
+000478 b11b                          IN  R17,PORTD
+000479 7810                      	ANDI R17,0b10000000
+00047a 2b01                      	OR   R16,R17
+00047b b90b                      	OUT  PORTD,R16
+00047c 91ff                          POP ZH
+00047d 91ef                          POP ZL
 
 
 RESOURCE USE INFORMATION
@@ -2268,37 +2300,37 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   1 r0 :   0 r1 :   2 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16: 310 r17: 210 r18:  26 r19:  11 r20:   4 
+r13:   0 r14:   0 r15:   0 r16: 318 r17: 216 r18:  31 r19:  11 r20:   4 
 r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   4 r31:   4 
 Registers used: 9 out of 35 (25.7%)
 
 "ATmega328P" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   1 add   :   3 adiw  :   0 and   :   0 
+.lds  :   0 .sts  :   0 adc   :   1 add   :   5 adiw  :   0 and   :   0 
 andi  :   3 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :  31 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :  31 brlt  :   0 brmi  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :  32 brge  :   0 brhc  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :  32 brlt  :   0 brmi  :   0 
 brne  :  77 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   9 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :  46 cls   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :  47 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   1 cp    :   6 cpc   :   0 
-cpi   : 128 cpse  :   0 dec   :  12 eor   :   1 fmul  :   0 fmuls :   0 
+cpi   : 130 cpse  :   0 dec   :  12 eor   :   1 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   6 inc   :  31 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :  50 lds   : 117 lpm   :   2 lsl   :   4 
-lsr   :   0 mov   :   1 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
+ld    :   0 ldd   :   0 ldi   :  51 lds   : 120 lpm   :   2 lsl   :   8 
+lsr   :   0 mov   :   2 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   0 or    :   3 ori   :   0 out   :  16 pop   :  11 
-push  :   9 rcall :  24 ret   :  24 reti  :   2 rjmp  : 104 rol   :   0 
+push  :   9 rcall :  30 ret   :  25 reti  :   2 rjmp  : 106 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :  10 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   4 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
-sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   : 102 
+sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   : 104 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
 Instructions used: 32 out of 113 (28.3%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0008be   2176     10   2186   32768   6.7%
+[.cseg] 0x000000 0x0008fe   2240     10   2250   32768   6.9%
 [.dseg] 0x000100 0x000117      0     23     23    2048   1.1%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

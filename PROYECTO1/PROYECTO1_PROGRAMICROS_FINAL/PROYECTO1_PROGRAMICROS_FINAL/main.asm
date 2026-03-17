@@ -551,6 +551,9 @@ SAVE_HD:
     STS hour_d,R16
 
 CHECK_24: ;verificar si llego a 24:00 para reiniciar
+    LDS R18,edit_digit
+    CPI R18,0
+    BRNE EXIT_UPDATE;no cambiar fecha si estoy editando
     LDS R16,hour_d
     CPI R16,2
     BRNE EXIT_UPDATE
@@ -565,7 +568,6 @@ CHECK_24: ;verificar si llego a 24:00 para reiniciar
 EXIT_UPDATE:
     RCALL CHECK_ALARM; luego de guardar valores revisar alarma
     RET
-
 
 ; ========================================= SUBRUTINAS DE FECHA
 
@@ -650,13 +652,14 @@ MONTH_31:
 	LDI R20,31
 
 CHECK_LIMIT: ;verificar limite dependiendo de r20 cargado
-	CP R16,R20
-	BRLO DATE_OK; si el dia actual es menor salta a date ok
-	BREQ DATE_OK
-	RCALL DATE_NEXT_MONTH_ROUTINE;; si es el mismo dia no importa si no va a esta rutina
+    CP R16,R20
+    BRLO DATE_OK; si el dia actual es menor salta a date ok
+    BREQ DATE_OK
+    RCALL DATE_NEXT_MONTH_ROUTINE;; si es el mismo dia no importa si no va a esta rutina
+    RCALL DATE_VERIFY_DAY_LIMIT ;revalidar dia con el nuevo mes
 
 DATE_OK:
-	RET
+    RET
 
 DATE_NEXT_MONTH_ROUTINE: ;CAMBIAR DE MES
     LDI R16,1
@@ -675,8 +678,29 @@ DATE_NEXT_MONTH_ROUTINE: ;CAMBIAR DE MES
     RJMP CHECK_YEAR_LIMIT
 
 SAVE_MONTH_U:
-    STS month_u,R16;si no hubo overflow guardamos
+    STS month_u,R16
+    RJMP CHECK_YEAR_LIMIT
 
+; validar que mes este entre 01 y 12
+FIX_MONTH_LIMIT:
+    LDS R16,month_d
+    MOV R18,R16
+    LSL R16
+    LSL R16
+    LSL R16
+    LSL R18
+    ADD R16,R18
+    LDS R17,month_u
+    ADD R16,R17   ; R16 = mes completo
+    CPI R16,13
+    BRLO MONTH_OK
+    LDI R17,1
+    STS month_u,R17
+    CLR R17
+    STS month_d,R17
+
+MONTH_OK:
+    RET
 
 CHECK_YEAR_LIMIT:
     LDS R16,month_d
@@ -691,6 +715,7 @@ CHECK_YEAR_LIMIT:
     STS month_d,R16; si no empezar en enero
 
 END_MONTH:
+	RCALL FIX_MONTH_LIMIT
     RET
 
 ; ========================================= SUBRUTINAS DE ALARMA
@@ -865,6 +890,7 @@ INC_MONTH_D:
     CLR R17
 INC_MONTH_D_SAVE:
     STS month_d,R17
+	RCALL FIX_MONTH_LIMIT
     RCALL DATE_VERIFY_DAY_LIMIT
     RET
 INC_MONTH_U:
@@ -875,6 +901,7 @@ INC_MONTH_U:
     CLR R17
 INC_MONTH_U_SAVE:
     STS month_u,R17
+	RCALL FIX_MONTH_LIMIT
     RCALL DATE_VERIFY_DAY_LIMIT
     RET
 
@@ -965,13 +992,16 @@ DEC_MU_SAVE:
 DEC_HOUR_FIX:
     LDS R17,hour_d
     CPI R17,2
-    BRNE DEC_EXIT
+    BREQ CHECK_U; si =2 seguimos
+    RJMP DEC_EXIT; si no, saltamos largo
+CHECK_U:
     LDS R17,hour_u
     CPI R17,4
     BRLO DEC_EXIT
     LDI R17,3
     STS hour_u,R17
     RJMP DEC_EXIT
+
 ; DECREMENTAR FECHA
 DEC_DIGIT_DATE:
     LDS R16,edit_digit
@@ -1018,6 +1048,7 @@ DEC_MONTH_D_STEP:
     DEC R17
 DEC_MONTH_D_SAVE:
     STS month_d,R17
+	RCALL FIX_MONTH_LIMIT 
     RCALL DATE_VERIFY_DAY_LIMIT
     RJMP DEC_EXIT
 DEC_MONTH_U:
@@ -1030,6 +1061,7 @@ DEC_MONTH_U_STEP:
     DEC R17
 DEC_MONTH_U_SAVE:
     STS month_u,R17
+	RCALL FIX_MONTH_LIMIT 
     RCALL DATE_VERIFY_DAY_LIMIT
 DEC_EXIT:
     RET
