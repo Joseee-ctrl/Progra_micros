@@ -1,7 +1,11 @@
 /*
  *
  * Created: 4/6/26
+<<<<<<< HEAD:laboratorio4/GccApplication1/GccApplication1/main.c
  * Author: Jose Mart?nez
+=======
+ * Author: Jose Martínez
+>>>>>>> ef7a6c377d7e247af0714d79d76829bda9e2295d:laboratorio4/Lab4/Lab4/main.c
  * Description: Contador de 8 bits + pot (ADC) en displays + alarma
  */
 
@@ -102,7 +106,11 @@ int main(void)
 }
 
 /****************************************/
+<<<<<<< HEAD:laboratorio4/GccApplication1/GccApplication1/main.c
 // CONFIGURACI?N GENERAL
+=======
+// CONFIGURACIÓN GENERAL
+>>>>>>> ef7a6c377d7e247af0714d79d76829bda9e2295d:laboratorio4/Lab4/Lab4/main.c
 void config_inicial(void)
 {
 	// Desactivar USART
@@ -120,7 +128,11 @@ void config_inicial(void)
 	DDRB |= (1 << PB2) | (1 << PB3) | (1 << PB4) | (1 << PB5);
 	PORTB &= ~((1 << PB2) | (1 << PB3) | (1 << PB4) | (1 << PB5));
 
+<<<<<<< HEAD:laboratorio4/GccApplication1/GccApplication1/main.c
 	// Configurar segmentos y d?gitos en PORTC como salida
+=======
+	// Configurar segmentos y dígitos en PORTC como salida
+>>>>>>> ef7a6c377d7e247af0714d79d76829bda9e2295d:laboratorio4/Lab4/Lab4/main.c
 	DDRC |= (1 << PC0) | (1 << PC1) | (1 << PC2) | (1 << PC3) | (1 << PC4) | (1 << PC5);
 
 	// Apagar LED de alarma al inicio
@@ -134,7 +146,11 @@ void config_inicial(void)
 }
 
 /****************************************/
+<<<<<<< HEAD:laboratorio4/GccApplication1/GccApplication1/main.c
 // CONFIGURACI?N ADC
+=======
+// CONFIGURACIÓN ADC
+>>>>>>> ef7a6c377d7e247af0714d79d76829bda9e2295d:laboratorio4/Lab4/Lab4/main.c
 void config_adc(void)
 {
 	ADMUX = 0;
@@ -144,10 +160,17 @@ void config_adc(void)
 
 	ADCSRA = 0;
 	ADCSRA |= (1 << ADEN);                  // habilitar ADC
+<<<<<<< HEAD:laboratorio4/GccApplication1/GccApplication1/main.c
 	ADCSRA |= (1 << ADIE);                  // habilitar interrupci?n ADC
 	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0); // prescaler 128
 
 	// Iniciar primera conversi?n
+=======
+	ADCSRA |= (1 << ADIE);                  // habilitar interrupción ADC
+	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0); // prescaler 128
+
+	// Iniciar primera conversión
+>>>>>>> ef7a6c377d7e247af0714d79d76829bda9e2295d:laboratorio4/Lab4/Lab4/main.c
 	ADCSRA |= (1 << ADSC);
 }
 
@@ -175,7 +198,11 @@ void limpiar_displays(void)
 }
 
 /****************************************/
+<<<<<<< HEAD:laboratorio4/GccApplication1/GccApplication1/main.c
 // CARGAR SEGMENTOS SEG?N VALOR HEXADECIMAL
+=======
+// CARGAR SEGMENTOS SEGÚN VALOR HEXADECIMAL
+>>>>>>> ef7a6c377d7e247af0714d79d76829bda9e2295d:laboratorio4/Lab4/Lab4/main.c
 void escribir_hex_display(uint8_t digito)
 {
 	uint8_t codigo = hex7seg[digito];
@@ -250,6 +277,10 @@ ISR(ADC_vect)
 	// Guardar resultado ADC de 8 bits
 	valor_adc = ADCH;
 
+<<<<<<< HEAD:laboratorio4/GccApplication1/GccApplication1/main.c
 	// Iniciar siguiente conversi?n
+=======
+	// Iniciar siguiente conversión
+>>>>>>> ef7a6c377d7e247af0714d79d76829bda9e2295d:laboratorio4/Lab4/Lab4/main.c
 	ADCSRA |= (1 << ADSC);
 }
