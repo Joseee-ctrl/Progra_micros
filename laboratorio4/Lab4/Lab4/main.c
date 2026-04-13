@@ -1,7 +1,7 @@
 /*
  *
  * Created: 4/6/26
- * Author: Jose Martínez
+ * Author: Jose MartÃ­nez
  * Description: Contador de 8 bits + pot (ADC) en displays + alarma
  */
 
@@ -102,7 +102,7 @@ int main(void)
 }
 
 /****************************************/
-// CONFIGURACIÓN GENERAL
+// CONFIGURACIÃ“N GENERAL
 void config_inicial(void)
 {
 	// Desactivar USART
@@ -120,7 +120,7 @@ void config_inicial(void)
 	DDRB |= (1 << PB2) | (1 << PB3) | (1 << PB4) | (1 << PB5);
 	PORTB &= ~((1 << PB2) | (1 << PB3) | (1 << PB4) | (1 << PB5));
 
-	// Configurar segmentos y dígitos en PORTC como salida
+	// Configurar segmentos y dÃ­gitos en PORTC como salida
 	DDRC |= (1 << PC0) | (1 << PC1) | (1 << PC2) | (1 << PC3) | (1 << PC4) | (1 << PC5);
 
 	// Apagar LED de alarma al inicio
@@ -134,7 +134,7 @@ void config_inicial(void)
 }
 
 /****************************************/
-// CONFIGURACIÓN ADC
+// CONFIGURACIÃ“N ADC
 void config_adc(void)
 {
 	ADMUX = 0;
@@ -144,10 +144,10 @@ void config_adc(void)
 
 	ADCSRA = 0;
 	ADCSRA |= (1 << ADEN);                  // habilitar ADC
-	ADCSRA |= (1 << ADIE);                  // habilitar interrupción ADC
+	ADCSRA |= (1 << ADIE);                  // habilitar interrupciÃ³n ADC
 	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0); // prescaler 128
 
-	// Iniciar primera conversión
+	// Iniciar primera conversiÃ³n
 	ADCSRA |= (1 << ADSC);
 }
 
@@ -175,7 +175,7 @@ void limpiar_displays(void)
 }
 
 /****************************************/
-// CARGAR SEGMENTOS SEGÚN VALOR HEXADECIMAL
+// CARGAR SEGMENTOS SEGÃšN VALOR HEXADECIMAL
 void escribir_hex_display(uint8_t digito)
 {
 	uint8_t codigo = hex7seg[digito];
@@ -232,7 +232,7 @@ void refrescar_hex(uint8_t numero)
 // COMPARAR ADC CON CONTADOR Y ENCENDER ALARMA
 void revisar_alarma(uint8_t cuenta)
 {
-	if (valor_adc == cuenta)
+	if (valor_adc >= cuenta)
 	{
 		PORTC |= (1 << PC0);
 	}
@@ -250,6 +250,6 @@ ISR(ADC_vect)
 	// Guardar resultado ADC de 8 bits
 	valor_adc = ADCH;
 
-	// Iniciar siguiente conversión
+	// Iniciar siguiente conversiÃ³n
 	ADCSRA |= (1 << ADSC);
 }
